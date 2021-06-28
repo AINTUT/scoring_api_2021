@@ -5,6 +5,7 @@ from flask_restful import Resource
 
 from config import Config
 from errors import ParameterMissing
+from errors import AssignmentSubmissionExpiration
 from errors import MidtermSubmissionExpiration
 from errors import InvalidMidtermMember
 from assignments import assignment_function_mapping
@@ -67,6 +68,9 @@ class AssignmentSubmission(Resource):
         } for a in assignments]
 
     def post(self):
+        if time.time() > Config.ASSIGNMENT_DEADLINE:
+            raise AssignmentSubmissionExpiration
+
         parser = reqparse.RequestParser()
         parser.add_argument(
             "sid",

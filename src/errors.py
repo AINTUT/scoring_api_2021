@@ -9,6 +9,10 @@ class InvalidAnswersFormat(HTTPException):
     pass
 
 
+class AssignmentSubmissionExpiration(HTTPException):
+    pass
+
+
 class MidtermSubmissionExpiration(HTTPException):
     pass
 
@@ -43,6 +47,11 @@ errors = {
         "message": "Answers format is invalid",
         "code": "invalid_answers",
         "status": 400,
+    },
+    "AssignmentSubmissionExpiration": {
+        "message": "Time for assignment submission is expired",
+        "code": "assignment_submission_expiration",
+        "status": 403,
     },
     "MidtermSubmissionExpiration": {
         "message": "Time for midterm submission is expired",
